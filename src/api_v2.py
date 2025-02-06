@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 import os
 import requests
 import pandas as pd
+from utils import read_input
 
 if os.path.exists(".env"):
     load_dotenv()
@@ -76,12 +77,12 @@ def save_to_csv(df: pd.DataFrame, symbol: str):
         print("❌ Error saving data to CSV:", e)
 
 
-def read_symbol_from_input():
-    symbol = input("Enter the symbol of the stock you want to fetch or use the default (GALP.LS): ")
-    return symbol if symbol else "GALP.LS"
+# def read_symbol_from_input():
+#     symbol = input("Enter the symbol of the stock you want to fetch or use the default (GALP.LS): ")
+#     return symbol if symbol else "GALP.LS"
 
 if __name__ == "__main__":
-    symbol = read_symbol_from_input()
+    symbol = read_input.read_symbol_from_input()
     df = fetch_monthly_adjusted_time_series(symbol)
     if df is not None:
         print(df.head())
