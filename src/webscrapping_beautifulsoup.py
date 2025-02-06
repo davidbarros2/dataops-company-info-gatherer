@@ -32,12 +32,12 @@ def fetch_currency_rates(curr_from: str, curr_to: str):
         print(f"- 1 {curr_from} = {rate} {curr_to}")
 
         conversionRate = [{
+            "timestamp": int(time.time()),
+            "insert_date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "from": curr_from,
             "to": curr_to,
             "rate": rate,
-            "amount": 1,
-            "timestamp": int(time.time()),
-            "insert_date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            "amount": 1
         }]
 
         df = pd.DataFrame(conversionRate)
