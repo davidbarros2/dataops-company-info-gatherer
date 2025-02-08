@@ -22,7 +22,7 @@ root/
 │   │   ..... # main scripts and modules
 │   │   api_v2.py                       # Main script to fetch a stock price changes
 │   │   webscraping_selenium.py         # Selenium-based web scraping script for news
-│   │   webscraping_beautifulsoup.py    # BeautifulSoup-based web scraping script for currency exchange rates
+│   │   webscraping_beautifulsoup.py    # BeautifulSoup-based web scraping script 
 │   |
 │   utils/
 │   │   webdriver/
@@ -70,7 +70,7 @@ python src/api_v2.py
 > Obtain the current currency exchange rate and add them to a CSV file
 ```bash
 cd to_your_project_directory
-python src/webscrapping_beautifulsoup.py
+python src/webscraping_beautifulsoup.py
 # Follow prompt instructions
 ```
 
