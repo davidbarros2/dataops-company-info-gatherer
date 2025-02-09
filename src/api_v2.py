@@ -96,14 +96,21 @@ def process_data(time_series):
     return df.sort_index()
 
 # Função para salvar os dados em um arquivo CSV
-def save_to_csv(df, output_path):
+def save_to_csv(df, symbol):
     """
     Salva os dados de um DataFrame em um arquivo CSV.
     
     Args:
         df (pd.DataFrame): DataFrame contendo os dados das ações.
-        output_path (str): Caminho para salvar o arquivo CSV.
+        symbol (str): Símbolo da ação para gerar o nome do arquivo.
     """
+    # Solicita ao usuário o caminho de saída
+    output_path = input("Digite o caminho e nome do arquivo para salvar os dados (ou pressione Enter para usar o padrão): ").strip()
+
+    # Define o nome padrão do arquivo se o usuário não fornecer um caminho
+    if not output_path:
+        output_path = f"./data/{symbol}_monthly_adjusted_data.csv"
+
     # Garante que o diretório onde o arquivo será salvo exista
     output_dir = Path(output_path).parent  # Extrai o diretório do caminho fornecido
     output_dir.mkdir(parents=True, exist_ok=True)  # Cria o diretório, se necessário
@@ -142,11 +149,8 @@ def main():
         # Processa os dados para criar um DataFrame
         df = process_data(time_series)
         
-        # Define o caminho para salvar o arquivo CSV
-        output_path = r"./data/monthly_adjusted_data.csv"  # Caminho para salvar o arquivo (modifique conforme necessário)
-        
         # Salva os dados no arquivo CSV
-        save_to_csv(df, output_path)
+        save_to_csv(df, symbol)
         
         # Exibe as primeiras 5 linhas do DataFrame no console
         print(df.head())
