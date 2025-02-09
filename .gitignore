@@ -58,5 +58,8 @@ instance/
 
 # Custom local files
 data/
+src/api_v1.py
 *.csv
 *.json
+*.tmp
+*.exe
