@@ -110,3 +110,4 @@ def test_save_news(mock_save_csv):
 
     save_tools.save_to_csv(news_data, "test_news.csv", ignore_overwrite=True, append_data=False)
     mock_save_csv.assert_called_once()
+
