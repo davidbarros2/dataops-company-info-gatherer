@@ -32,7 +32,7 @@ def mock_env():
 def selenium_driver():
     """Initialize Selenium WebDriver in undetected mode for testing"""
     options = Options()
-    # options.add_argument("--headless")  # Run in headless mode for faster testing
+    options.add_argument("--headless")  # Run in headless mode for faster testing
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
