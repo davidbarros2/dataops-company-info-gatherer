@@ -41,6 +41,9 @@ def selenium_driver():
     yield driver
     driver.quit()
 
+def test_hello_world():
+    assert "Hello, World!" == "Hello, World!"
+
 def test_build_search_url():
     """Test URL generation from webscraping_selenium.py"""
     params = {
@@ -110,4 +113,3 @@ def test_save_news(mock_save_csv):
 
     save_tools.save_to_csv(news_data, "test_news.csv", ignore_overwrite=True, append_data=False)
     mock_save_csv.assert_called_once()
-
