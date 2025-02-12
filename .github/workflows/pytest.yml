@@ -3,10 +3,10 @@ name: Automated tests for Python using Pytest
 on:
   push:
     branches:
-      - master
+      - feature-Rates
   pull_request:
     branches:
-      - master
+      - feature-Rates
 
 jobs:
   test:
