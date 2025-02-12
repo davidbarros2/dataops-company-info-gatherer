@@ -1,20 +1,18 @@
 import os
 import pytest
-from urllib.parse import urlparse, parse_qs, urlencode, quote_plus
-from unittest.mock import MagicMock, patch
-import undetected_chromedriver as uc
-from selenium.webdriver.common.by import By
+from urllib.parse import urlencode, quote_plus
+from unittest.mock import patch
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import pandas as pd
 from dotenv import load_dotenv
 from webscraping_selenium import (
     build_search_url,
     scrape_news,
-    load_existing_news,
-    NEWS_PAGE_URL,
-    PARAMS_TEMPLATE
+    load_existing_news
 )
-import time
 from utils import save_tools
 
 # Automatically load test environment variables from `.env.test`
@@ -32,17 +30,17 @@ def mock_env():
 def selenium_driver():
     """Initialize Selenium WebDriver in undetected mode for testing"""
     options = Options()
-    options.add_argument("--headless")  # Run in headless mode for faster testing
+    options.add_argument("--headless=new")  # Run in headless mode for faster testing
+    options.add_argument("--window-size=1920x1080")
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--enable-unsafe-swiftshader")
+    options.add_argument('user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36')
 
-    driver = uc.Chrome(options=options)
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
     yield driver
     driver.quit()
-
-def test_hello_world():
-    assert "Hello, World!" == "Hello, World!"
 
 def test_build_search_url():
     """Test URL generation from webscraping_selenium.py"""
