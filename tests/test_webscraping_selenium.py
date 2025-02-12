@@ -8,7 +8,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import pandas as pd
 from dotenv import load_dotenv
-from webscraping_selenium import (
+from src.webscraping_selenium import (
     build_search_url,
     scrape_news,
     load_existing_news
