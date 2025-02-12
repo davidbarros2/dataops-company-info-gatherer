@@ -3,10 +3,12 @@ name: Automated tests for Python using Pytest
 on:
   push:
     branches:
-      - feature-Rates
+      - master
+      - feature-*
   pull_request:
     branches:
-      - feature-Rates
+      - master
+      - feature-*
 
 jobs:
   test:
@@ -25,6 +27,16 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install -r requirements.txt
+
+    - name: Install software
+      run: |
+        sudo apt-get install -y chromium-browser
+
+    - name: Set Environment Variables from Secrets
+      run: |
+        echo "NEWS_PAGE_URL=${{ secrets.NEWS_PAGE_URL }}" >> $GITHUB_ENV
+        echo "ALPHA_VANTAGE_API_KEY=${{ secrets.ALPHA_VANTAGE_API_KEY }}" >> $GITHUB_ENV
+        echo "ALPHA_VANTAGE_URL=${{ secrets.ALPHA_VANTAGE_URL }}" >> $GITHUB_ENV
 
     - name: Run tests
       run: pytest -v
