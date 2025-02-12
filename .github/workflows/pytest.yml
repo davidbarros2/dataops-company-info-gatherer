@@ -29,7 +29,8 @@ jobs:
         pip install -r requirements.txt
 
     - name: Install software
-        run: sudo apt-get install -y chromium-browser
+      run: |
+        sudo apt-get install -y chromium-browser
 
     - name: Set Environment Variables from Secrets
       run: |
