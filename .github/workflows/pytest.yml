@@ -5,10 +5,9 @@ on:
     branches:
       - master
       - feature-*
-  pull_request:
-    branches:
-      - master
-      - feature-*
+  # pull_request:
+    # branches:
+      # - feature-*
 
 jobs:
   test:
