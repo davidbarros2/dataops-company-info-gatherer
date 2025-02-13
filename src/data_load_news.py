@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, String, Text, BIGINT, DateTime, Sequence
+from sqlalchemy import create_engine, Column, String, Text, BigInteger, DateTime
 from utils.sqlalchemy.config import engine, create_table_if_not_exists, insert_data
 from utils.save_tools import load_existing_dataframe
 import pandas as pd
@@ -45,15 +45,15 @@ def deploy_to_database(df: pd.DataFrame):
         exit(1)
     
     columns = [
-        Column("id", BIGINT, Sequence("news_table_id_seq", 1), primary_key=True),
-        Column("date", DateTime),
-        Column("title", String),
+        Column("id", BigInteger, primary_key=True, autoincrement=True),
+        Column("date", DateTime, nullable=False),
+        Column("title", String, nullable=False),
         Column("link", String),
         Column("summary", Text),
     ]
-    create_table_if_not_exists(TABLE_NAME, columns)
+    create_table_if_not_exists(TABLE_NAME, columns, unique_constraints=[("date", "title")])
 
-    insert_data(TABLE_NAME, df.to_dict(orient="records"))
+    insert_data(TABLE_NAME, df.to_dict(orient="records"), conflict_columns=["date", "title"])
 
     try:
         conn.close()
